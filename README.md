@@ -78,7 +78,7 @@ class Developer {
 
 Si tienes alguna pregunta sobre desarrollo móvil, Flutter, o simplemente quieres charlar sobre tecnología, ¡no dudes en contactarme!
 
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tu@email.com)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jhonacodes@gmail.com)
 [![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/tu-server)
 
 </div>
