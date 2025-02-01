@@ -47,8 +47,8 @@ const JhonaCode = {
 ## 💻 Distribución de Lenguajes
 
 <div align="center">
-  <!-- Aquí irá el nuevo SVG de estadísticas de lenguajes específicos -->
   <img src="language-stats.svg" alt="Language distribution" />
+  <img src="languages-history.svg" alt="Languages History" />
 </div>
 
 ## 🌟 Proyectos Destacados
