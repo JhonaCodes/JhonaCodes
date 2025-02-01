@@ -48,7 +48,6 @@ jobs:
           percentages = {lang: round((language_bytes[lang]/total_bytes)*100 if total_bytes > 0 else 0, 1) 
                         for lang in all_languages}
           
-          # Filtrar solo los que tienen más del 10%
           filtered_languages = [lang for lang in all_languages if percentages[lang] >= 10]
           
           colors = {
@@ -60,15 +59,8 @@ jobs:
           
           svg = f'''<?xml version="1.0" encoding="UTF-8"?>
           <svg xmlns="http://www.w3.org/2000/svg" width="300" height="165" viewBox="0 0 300 165">
-              <defs>
-                  <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#242538;stop-opacity:1" />
-                  </linearGradient>
-              </defs>
-              
               <!-- Card Background -->
-              <rect width="300" height="165" rx="4.5" fill="#1a1b27"/>
+              <rect width="300" height="165" rx="6" fill="#1a1b27"/>
               
               <!-- Title -->
               <text x="25" y="30" font-family="Arial" font-size="14" fill="#70a5fd">Lenguajes Recientes</text>
@@ -77,16 +69,14 @@ jobs:
           y_position = 50
           for lang in filtered_languages:
               percentage = percentages[lang]
-              bar_width = (percentage * 250) / 100  # Ancho máximo de 250
+              bar_width = (percentage * 250) / 100
               
               svg += f'''
                   <g transform="translate(25, {y_position})">
                       <text x="0" y="0" font-family="Arial" font-size="12" fill="#38bdae">{lang}</text>
                       <text x="235" y="0" font-family="Arial" font-size="12" fill="#38bdae">{percentage}%</text>
                       <rect x="0" y="8" width="250" height="8" fill="#1f2133" rx="4"/>
-                      <rect x="0" y="8" width="{bar_width}" height="8" fill="{colors[lang]}" opacity="0.7" rx="4">
-                          <animate attributeName="width" from="0" to="{bar_width}" dur="1s" fill="freeze"/>
-                      </rect>
+                      <rect x="0" y="8" width="{bar_width}" height="8" fill="{colors[lang]}" opacity="0.7" rx="4"/>
                   </g>
               '''
               y_position += 35
