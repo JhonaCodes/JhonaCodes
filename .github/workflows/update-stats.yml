@@ -1,0 +1,73 @@
+name: Update Language Stats
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install PyGithub
+      - name: Update stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<EOF
+          from github import Github
+          import os
+          
+          g = Github(os.getenv('GITHUB_TOKEN'))
+          user = g.get_user('JhonaCodes')
+          
+          target_languages = ['Java', 'Dart', 'Kotlin', 'Rust']
+          language_bytes = {lang: 0 for lang in target_languages}
+          total_bytes = 0
+          
+          for repo in user.get_repos():
+              langs = repo.get_languages()
+              for lang, bytes_count in langs.items():
+                  if lang in target_languages:
+                      language_bytes[lang] += bytes_count
+                      total_bytes += bytes_count
+          
+          percentages = {lang: round((bytes/total_bytes)*100 if total_bytes > 0 else 0, 1) 
+                        for lang, bytes in language_bytes.items()}
+          
+          colors = {
+              'Java': '#b07219',
+              'Dart': '#00B4AB',
+              'Kotlin': '#A97BFF',
+              'Rust': '#dea584'
+          }
+          
+          svg = f'''
+          <svg xmlns="http://www.w3.org/2000/svg" width="300" height="165" viewBox="0 0 300 165">
+              <rect width="300" height="165" fill="#1a1b27" rx="4.5"/>
+              <text x="25" y="30" font-family="Arial" font-size="14" fill="#70a5fd">Mis Lenguajes Principales</text>
+              {"".join(f'''
+                  <g transform="translate(25, {50 + i*35})">
+                      <text x="0" y="0" font-family="Arial" font-size="12" fill="#38bdae">{lang}</text>
+                      <text x="235" y="0" font-family="Arial" font-size="12" fill="#38bdae">{percentages[lang]}%</text>
+                      <rect x="0" y="8" width="250" height="8" fill="#1f2133" rx="4"/>
+                      <rect x="0" y="8" width="{percentages[lang]*2.5}" height="8" fill="{colors[lang]}" rx="4"/>
+                  </g>''' for i, lang in enumerate(target_languages))}
+          </svg>
+          '''
+          
+          with open('language-stats.svg', 'w') as f:
+              f.write(svg)
+          EOF
+      - name: Commit and push if changed
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add language-stats.svg
+          git commit -m "Update language stats" || exit 0
+          git push
