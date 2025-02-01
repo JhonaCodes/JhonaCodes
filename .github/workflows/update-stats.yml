@@ -28,7 +28,6 @@ jobs:
           g = Github(os.getenv('GITHUB_TOKEN'))
           user = g.get_user('JhonaCodes')
           
-          # Mantener el orden completo pero filtrar después
           all_languages = ['Dart', 'Rust', 'Java', 'Kotlin']
           language_bytes = {lang: 0 for lang in all_languages}
           total_bytes = 0
@@ -46,7 +45,6 @@ jobs:
           if total_bytes == 0:
               total_bytes = 1
               
-          # Calcular porcentajes para todos
           percentages = {lang: round((language_bytes[lang]/total_bytes)*100 if total_bytes > 0 else 0, 1) 
                         for lang in all_languages}
           
@@ -60,52 +58,38 @@ jobs:
               'Kotlin': '#A97BFF'
           }
           
-          # Ajustar altura del SVG según cantidad de lenguajes mostrados
-          svg_height = 80 + (len(filtered_languages) * 40)
-          
           svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="{svg_height}" viewBox="0 0 400 {svg_height}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="300" height="165" viewBox="0 0 300 165">
               <defs>
-                  <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1" />
                       <stop offset="100%" style="stop-color:#242538;stop-opacity:1" />
                   </linearGradient>
-                  <filter id="dropShadow">
-                      <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
-                      <feOffset dx="0" dy="1" result="offsetblur" />
-                      <feComponentTransfer>
-                          <feFuncA type="linear" slope="0.2" />
-                      </feComponentTransfer>
-                      <feMerge>
-                          <feMergeNode />
-                          <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                  </filter>
               </defs>
               
-              <rect width="400" height="{svg_height}" rx="15" fill="url(#cardGradient)" filter="url(#dropShadow)" />
-              <text x="30" y="45" font-family="Arial" font-size="20" fill="#70a5fd" font-weight="bold">
-                  Lenguajes utilizados recientemente.
-              </text>
-              <line x1="30" y1="60" x2="370" y2="60" stroke="#38bdae" stroke-width="0.5" opacity="0.3"/>
+              <!-- Card Background -->
+              <rect width="300" height="165" rx="4.5" fill="#1a1b27"/>
+              
+              <!-- Title -->
+              <text x="25" y="30" font-family="Arial" font-size="14" fill="#70a5fd">Lenguajes Recientes</text>
           '''
           
-          y_position = 90
+          y_position = 50
           for lang in filtered_languages:
               percentage = percentages[lang]
-              bar_width = (percentage * 340) / 100
+              bar_width = (percentage * 250) / 100  # Ancho máximo de 250
               
               svg += f'''
-                  <g transform="translate(30, {y_position})">
-                      <text x="0" y="0" font-family="Arial" font-size="14" fill="#fff">{lang}</text>
-                      <text x="340" y="0" font-family="Arial" font-size="14" fill="#38bdae" text-anchor="end">{percentage}%</text>
-                      <rect x="0" y="10" width="340" height="12" rx="6" fill="#1f2133" opacity="0.7"/>
-                      <rect x="0" y="10" width="{bar_width}" height="12" rx="6" fill="{colors[lang]}">
+                  <g transform="translate(25, {y_position})">
+                      <text x="0" y="0" font-family="Arial" font-size="12" fill="#38bdae">{lang}</text>
+                      <text x="235" y="0" font-family="Arial" font-size="12" fill="#38bdae">{percentage}%</text>
+                      <rect x="0" y="8" width="250" height="8" fill="#1f2133" rx="4"/>
+                      <rect x="0" y="8" width="{bar_width}" height="8" fill="{colors[lang]}" opacity="0.7" rx="4">
                           <animate attributeName="width" from="0" to="{bar_width}" dur="1s" fill="freeze"/>
                       </rect>
                   </g>
               '''
-              y_position += 40
+              y_position += 35
           
           svg += '</svg>'
           
