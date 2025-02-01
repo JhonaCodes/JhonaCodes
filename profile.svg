@@ -1,106 +1,120 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="450" height="840" viewBox="0 0 450 840">
-    <defs>
-        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#242538;stop-opacity:1" />
-        </linearGradient>
-        <filter id="softShadow">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-            <feOffset dx="0" dy="2"/>
-            <feComponentTransfer>
-                <feFuncA type="linear" slope="0.3"/>
-            </feComponentTransfer>
-            <feMerge>
-                <feMergeNode/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-        <style>
-            .title { font: bold 28px 'Arial', sans-serif; fill: #70a5fd; }
-            .subtitle { font: 18px 'Arial', sans-serif; fill: #38bdae; }
-            .section-title { font: bold 20px 'Arial', sans-serif; fill: #70a5fd; }
-        </style>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="450" height="840" viewBox="0 0 450 840">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#242538;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="softShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style type="text/css"><![CDATA[
+      .title { font: bold 28px Arial, sans-serif; fill: #70a5fd; }
+      .subtitle { font: 18px Arial, sans-serif; fill: #38bdae; }
+      .section-title { font: bold 20px Arial, sans-serif; fill: #70a5fd; }
+    ]]></style>
+  </defs>
 
-    <!-- Main Background -->
-    <rect x="10" y="10" width="430" height="820" rx="20" fill="url(#bgGradient)" filter="url(#softShadow)"/>
-    
-    <!-- Corner Decorations -->
-    <g fill="none" stroke="#38bdae" stroke-width="1.5">
-        <!-- Top Left -->
-        <path d="M25,25 h20 M25,25 v20"/>
-        <!-- Top Right -->
-        <path d="M425,25 h-20 M425,25 v20"/>
-        <!-- Bottom Left -->
-        <path d="M25,815 h20 M25,815 v-20"/>
-        <!-- Bottom Right -->
-        <path d="M425,815 h-20 M425,815 v-20"/>
+  <!-- Fondo Principal -->
+  <rect x="10" y="10" width="430" height="820" rx="20"
+        fill="url(#bgGradient)" filter="url(#softShadow)"/>
+
+  <!-- Decoraciones en Esquinas -->
+  <g fill="none" stroke="#38bdae" stroke-width="1.5">
+    <!-- Esquina Superior Izquierda -->
+    <path d="M25,25 h20 M25,25 v20"/>
+    <!-- Esquina Superior Derecha -->
+    <path d="M425,25 h-20 M425,25 v20"/>
+    <!-- Esquina Inferior Izquierda -->
+    <path d="M25,815 h20 M25,815 v-20"/>
+    <!-- Esquina Inferior Derecha -->
+    <path d="M425,815 h-20 M425,815 v-20"/>
+  </g>
+
+  <!-- Barra de Estado -->
+  <g transform="translate(40, 40)">
+    <g fill="#38bdae" opacity="0.8">
+      <rect x="0" y="0" width="3" height="10"/>
+      <rect x="5" y="2" width="3" height="8"/>
+      <rect x="10" y="4" width="3" height="6"/>
+      <rect x="15" y="6" width="3" height="4"/>
     </g>
+    <text x="370" y="10" font-family="Arial" font-size="12" fill="#38bdae">100%</text>
+  </g>
 
-    <!-- Status Bar -->
-    <g transform="translate(40, 40)">
-        <g fill="#38bdae" opacity="0.8">
-            <rect x="0" y="0" width="3" height="10"/>
-            <rect x="5" y="2" width="3" height="8"/>
-            <rect x="10" y="4" width="3" height="6"/>
-            <rect x="15" y="6" width="3" height="4"/>
-        </g>
-        <text x="370" y="10" font-family="Arial" font-size="12" fill="#38bdae">100%</text>
+  <!-- Banner con Logo -->
+  <foreignObject x="40" y="65" width="370" height="120">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <img width="370" height="120"
+           src="https://github.com/JhonaCodes/jhonacode/raw/main/banner_jhonacode.png"
+           style="border-radius: 10px; object-fit: cover;"/>
+    </body>
+  </foreignObject>
+
+  <!-- Información del Perfil -->
+  <text x="225" y="220" text-anchor="middle" class="title">JhonaCode</text>
+  <text x="225" y="250" text-anchor="middle" class="subtitle">
+    Software Engineer &amp; Mobile Developer
+  </text>
+
+  <!-- Enlaces Sociales -->
+  <g transform="translate(50, 280)">
+    <g filter="url(#softShadow)">
+      <a xlink:href="https://jhonacode.com">
+        <rect width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
+        <text x="80" y="25" text-anchor="middle" fill="#38bdae" font-size="14">🌐 Website</text>
+      </a>
+      <a xlink:href="https://linkedin.com/in/jhonatanortiz">
+        <rect x="190" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
+        <text x="270" y="25" text-anchor="middle" fill="#38bdae" font-size="14">👔 LinkedIn</text>
+      </a>
+      <a xlink:href="https://twitter.com/jhonacode">
+        <rect y="50" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
+        <text x="80" y="75" text-anchor="middle" fill="#38bdae" font-size="14">🐦 Twitter</text>
+      </a>
+      <a xlink:href="https://github.com/JhonaCodes">
+        <rect x="190" y="50" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
+        <text x="270" y="75" text-anchor="middle" fill="#38bdae" font-size="14">📦 GitHub</text>
+      </a>
     </g>
+  </g>
 
-    <!-- Banner with Logo -->
-    <foreignObject x="40" y="65" width="370" height="120">
-        <img width="370" height="120" src="https://github.com/JhonaCodes/jhonacode/raw/main/banner_jhonacode.png" 
-             style="border-radius: 10px; object-fit: cover;"/>
+  <!-- Estadísticas de GitHub -->
+  <text x="225" y="400" text-anchor="middle" class="section-title">GitHub Analytics</text>
+  <foreignObject x="40" y="420" width="370" height="150">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+      <img width="370" height="150" 
+           src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=JhonaCodes&amp;theme=tokyonight"
+           style="border-radius: 10px;"/>
+    </body>
+  </foreignObject>
+
+  <!-- Distribución de Tecnologías -->
+  <text x="225" y="600" text-anchor="middle" class="section-title">Technology Expertise</text>
+  <g transform="translate(40, 620)">
+    <image width="180" height="100" xlink:href="language-stats.svg"/>
+    <image x="190" width="180" height="100" xlink:href="languages-history.svg"/>
+  </g>
+
+  <!-- Vistas del Perfil -->
+  <g transform="translate(125, 750)">
+    <text x="100" y="20" text-anchor="middle" class="section-title" style="font-size: 16px;">
+      Profile Views
+    </text>
+    <foreignObject x="0" y="30" width="200" height="30">
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <img src="https://komarev.com/ghpvc/?username=JhonaCodes&amp;color=blue&amp;style=for-the-badge" 
+             style="display: block; margin: auto;"/>
+      </body>
     </foreignObject>
-
-    <!-- Profile Info -->
-    <text x="225" y="220" text-anchor="middle" class="title">JhonaCode</text>
-    <text x="225" y="250" text-anchor="middle" class="subtitle">Software Engineer &amp; Mobile Developer</text>
-
-    <!-- Social Links -->
-    <g transform="translate(50, 280)">
-        <g filter="url(#softShadow)">
-            <a href="https://jhonacode.com">
-                <rect width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
-                <text x="80" y="25" text-anchor="middle" fill="#38bdae" font-size="14">🌐 Website</text>
-            </a>
-            <a href="https://linkedin.com/in/jhonatanortiz">
-                <rect x="190" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
-                <text x="270" y="25" text-anchor="middle" fill="#38bdae" font-size="14">👔 LinkedIn</text>
-            </a>
-            <a href="https://twitter.com/jhonacode">
-                <rect y="50" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
-                <text x="80" y="75" text-anchor="middle" fill="#38bdae" font-size="14">🐦 Twitter</text>
-            </a>
-            <a href="https://github.com/JhonaCodes">
-                <rect x="190" y="50" width="160" height="40" rx="10" fill="#1f2133" stroke="#38bdae" stroke-width="1"/>
-                <text x="270" y="75" text-anchor="middle" fill="#38bdae" font-size="14">📦 GitHub</text>
-            </a>
-        </g>
-    </g>
-
-    <!-- GitHub Stats -->
-    <text x="225" y="400" text-anchor="middle" class="section-title">GitHub Analytics</text>
-    <foreignObject x="40" y="420" width="370" height="150">
-        <img width="370" height="150" 
-             src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=JhonaCodes"
-             style="border-radius: 10px;"/>
-    </foreignObject>
-
-    <!-- Language Distribution -->
-    <text x="225" y="600" text-anchor="middle" class="section-title">Technology Expertise</text>
-    <g transform="translate(40, 620)">
-        <image width="180" height="100" href="language-stats.svg"/>
-        <image x="190" width="180" height="100" href="languages-history.svg"/>
-    </g>
-
-    <!-- Profile Views -->
-    <g transform="translate(125, 750)">
-        <text x="100" y="20" text-anchor="middle" class="section-title" style="font-size: 16px;">Profile Views</text>
-        <foreignObject x="0" y="30" width="200" height="30">
-            <img src="https://komarev.com/ghpvc/?username=JhonaCodes" 
-                 style="display: block; margin: auto;"/>
-        </foreignObject>
-    </g>
+  </g>
 </svg>
