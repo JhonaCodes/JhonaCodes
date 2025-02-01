@@ -28,19 +28,15 @@ jobs:
           g = Github(os.getenv('GITHUB_TOKEN'))
           user = g.get_user('JhonaCodes')
           
-          # Definir el orden deseado
           desired_order = ['Dart', 'Rust', 'Java', 'Kotlin']
-          
-          # Recolectar los datos reales
-          target_languages = set(desired_order)
-          language_bytes = {lang: 0 for lang in target_languages}
+          language_bytes = {lang: 0 for lang in desired_order}
           total_bytes = 0
           
           for repo in user.get_repos():
               try:
                   langs = repo.get_languages()
                   for lang, bytes_count in langs.items():
-                      if lang in target_languages:
+                      if lang in desired_order:
                           language_bytes[lang] += bytes_count
                           total_bytes += bytes_count
               except Exception as e:
@@ -48,8 +44,7 @@ jobs:
           
           if total_bytes == 0:
               total_bytes = 1
-          
-          # Calcular porcentajes pero mantener el orden deseado
+              
           percentages = {lang: round((language_bytes[lang]/total_bytes)*100 if total_bytes > 0 else 0, 1) 
                         for lang in desired_order}
           
@@ -60,24 +55,57 @@ jobs:
               'Kotlin': '#A97BFF'
           }
           
+          # Generar SVG mejorado
           svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-          <svg xmlns="http://www.w3.org/2000/svg" width="300" height="165" viewBox="0 0 300 165">
-              <rect width="300" height="165" fill="#1a1b27" rx="4.5"/>
-              <text x="25" y="30" font-family="Arial" font-size="14" fill="#70a5fd">Mis Lenguajes Principales</text>
-              {"".join(f'''
-                  <g transform="translate(25, {50 + i*35})">
-                      <text x="0" y="0" font-family="Arial" font-size="12" fill="#38bdae">{lang}</text>
-                      <text x="235" y="0" font-family="Arial" font-size="12" fill="#38bdae">{percentages[lang]}%</text>
-                      <rect x="0" y="8" width="250" height="8" fill="#1f2133" rx="4"/>
-                      <rect x="0" y="8" width="{percentages[lang]*2.5}" height="8" fill="{colors[lang]}" rx="4"/>
-                  </g>''' for i, lang in enumerate(desired_order))}
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="220" viewBox="0 0 400 220">
+              <defs>
+                  <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#242538;stop-opacity:1" />
+                  </linearGradient>
+                  <filter id="dropShadow">
+                      <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+                      <feOffset dx="0" dy="1" result="offsetblur" />
+                      <feComponentTransfer>
+                          <feFuncA type="linear" slope="0.2" />
+                      </feComponentTransfer>
+                      <feMerge>
+                          <feMergeNode />
+                          <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                  </filter>
+              </defs>
+              
+              <rect width="400" height="220" rx="15" fill="url(#cardGradient)" filter="url(#dropShadow)" />
+              <text x="30" y="45" font-family="Arial" font-size="20" fill="#70a5fd" font-weight="bold">
+                  Mis Lenguajes Principales
+              </text>
+              <line x1="30" y1="60" x2="370" y2="60" stroke="#38bdae" stroke-width="0.5" opacity="0.3"/>
           '''
+          
+          y_position = 90
+          for lang in desired_order:
+              percentage = percentages[lang]
+              bar_width = (percentage * 340) / 100  # Calcular ancho basado en porcentaje
+              
+              svg += f'''
+                  <g transform="translate(30, {y_position})">
+                      <text x="0" y="0" font-family="Arial" font-size="14" fill="#fff">{lang}</text>
+                      <text x="340" y="0" font-family="Arial" font-size="14" fill="#38bdae" text-anchor="end">{percentage}%</text>
+                      <rect x="0" y="10" width="340" height="12" rx="6" fill="#1f2133" opacity="0.7"/>
+                      <rect x="0" y="10" width="{bar_width}" height="12" rx="6" fill="{colors[lang]}">
+                          <animate attributeName="width" from="0" to="{bar_width}" dur="1s" fill="freeze"/>
+                      </rect>
+                  </g>
+              '''
+              y_position += 40
+          
+          svg += '</svg>'
           
           with open('language-stats.svg', 'w') as f:
               f.write(svg)
               
-          print("SVG file created successfully")
+          print("SVG file created successfully with percentages:", percentages)
           EOF
       - name: Commit and push if changed
         env:
