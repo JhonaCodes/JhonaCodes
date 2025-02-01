@@ -65,9 +65,12 @@ jobs:
               f.write(svg)
           EOF
       - name: Commit and push if changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git add language-stats.svg
           git commit -m "Update language stats" || exit 0
           git push
