@@ -23,7 +23,7 @@ jobs:
           from github import Github
           import os
           
-          g = Github(os.getenv('GITHUB_TOKEN'))
+          g = Github(os.getenv('G_TOKEN'))
           user = g.get_user('JhonaCodes')
           
           target_languages = ['Java', 'Dart', 'Kotlin', 'Rust']
