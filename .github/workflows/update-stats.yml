@@ -28,15 +28,16 @@ jobs:
           g = Github(os.getenv('GITHUB_TOKEN'))
           user = g.get_user('JhonaCodes')
           
-          desired_order = ['Dart', 'Rust', 'Java', 'Kotlin']
-          language_bytes = {lang: 0 for lang in desired_order}
+          # Mantener el orden completo pero filtrar después
+          all_languages = ['Dart', 'Rust', 'Java', 'Kotlin']
+          language_bytes = {lang: 0 for lang in all_languages}
           total_bytes = 0
           
           for repo in user.get_repos():
               try:
                   langs = repo.get_languages()
                   for lang, bytes_count in langs.items():
-                      if lang in desired_order:
+                      if lang in all_languages:
                           language_bytes[lang] += bytes_count
                           total_bytes += bytes_count
               except Exception as e:
@@ -45,8 +46,12 @@ jobs:
           if total_bytes == 0:
               total_bytes = 1
               
+          # Calcular porcentajes para todos
           percentages = {lang: round((language_bytes[lang]/total_bytes)*100 if total_bytes > 0 else 0, 1) 
-                        for lang in desired_order}
+                        for lang in all_languages}
+          
+          # Filtrar solo los que tienen más del 10%
+          filtered_languages = [lang for lang in all_languages if percentages[lang] >= 10]
           
           colors = {
               'Dart': '#00B4AB',
@@ -55,9 +60,11 @@ jobs:
               'Kotlin': '#A97BFF'
           }
           
-          # Generar SVG mejorado
+          # Ajustar altura del SVG según cantidad de lenguajes mostrados
+          svg_height = 80 + (len(filtered_languages) * 40)
+          
           svg = f'''<?xml version="1.0" encoding="UTF-8"?>
-          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="220" viewBox="0 0 400 220">
+          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="{svg_height}" viewBox="0 0 400 {svg_height}">
               <defs>
                   <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" style="stop-color:#1a1b27;stop-opacity:1" />
@@ -76,17 +83,17 @@ jobs:
                   </filter>
               </defs>
               
-              <rect width="400" height="220" rx="15" fill="url(#cardGradient)" filter="url(#dropShadow)" />
+              <rect width="400" height="{svg_height}" rx="15" fill="url(#cardGradient)" filter="url(#dropShadow)" />
               <text x="30" y="45" font-family="Arial" font-size="20" fill="#70a5fd" font-weight="bold">
-                  Mis Lenguajes Principales
+                  Lenguajes utilizados recientemente.
               </text>
               <line x1="30" y1="60" x2="370" y2="60" stroke="#38bdae" stroke-width="0.5" opacity="0.3"/>
           '''
           
           y_position = 90
-          for lang in desired_order:
+          for lang in filtered_languages:
               percentage = percentages[lang]
-              bar_width = (percentage * 340) / 100  # Calcular ancho basado en porcentaje
+              bar_width = (percentage * 340) / 100
               
               svg += f'''
                   <g transform="translate(30, {y_position})">
@@ -105,7 +112,7 @@ jobs:
           with open('language-stats.svg', 'w') as f:
               f.write(svg)
               
-          print("SVG file created successfully with percentages:", percentages)
+          print("SVG created with filtered languages. Percentages:", {lang: percentages[lang] for lang in filtered_languages})
           EOF
       - name: Commit and push if changed
         env:
