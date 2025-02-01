@@ -8,9 +8,11 @@ jobs:
   update-stats:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.G_TOKEN }}
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
       - name: Install dependencies
@@ -23,7 +25,11 @@ jobs:
           from github import Github
           import os
           
-          g = Github(os.getenv('G_TOKEN'))
+          token = os.getenv('GITHUB_TOKEN')
+          if not token:
+              raise ValueError("No se encontró el token de GitHub")
+              
+          g = Github(token)
           user = g.get_user('JhonaCodes')
           
           target_languages = ['Java', 'Dart', 'Kotlin', 'Rust']
@@ -31,14 +37,23 @@ jobs:
           total_bytes = 0
           
           for repo in user.get_repos():
-              langs = repo.get_languages()
-              for lang, bytes_count in langs.items():
-                  if lang in target_languages:
-                      language_bytes[lang] += bytes_count
-                      total_bytes += bytes_count
+              try:
+                  langs = repo.get_languages()
+                  for lang, bytes_count in langs.items():
+                      if lang in target_languages:
+                          language_bytes[lang] += bytes_count
+                          total_bytes += bytes_count
+              except Exception as e:
+                  print(f"Error processing repo {repo.name}: {e}")
+          
+          if total_bytes == 0:
+              print("No se encontraron bytes de código")
+              total_bytes = 1
           
           percentages = {lang: round((bytes/total_bytes)*100 if total_bytes > 0 else 0, 1) 
                         for lang, bytes in language_bytes.items()}
+          
+          print("Percentages calculated:", percentages)
           
           colors = {
               'Java': '#b07219',
@@ -47,7 +62,7 @@ jobs:
               'Rust': '#dea584'
           }
           
-          svg = f'''
+          svg = f'''<?xml version="1.0" encoding="UTF-8"?>
           <svg xmlns="http://www.w3.org/2000/svg" width="300" height="165" viewBox="0 0 300 165">
               <rect width="300" height="165" fill="#1a1b27" rx="4.5"/>
               <text x="25" y="30" font-family="Arial" font-size="14" fill="#70a5fd">Mis Lenguajes Principales</text>
@@ -63,6 +78,8 @@ jobs:
           
           with open('language-stats.svg', 'w') as f:
               f.write(svg)
+              
+          print("SVG file created successfully")
           EOF
       - name: Commit and push if changed
         env:
