@@ -84,7 +84,7 @@
     <text x="225" y="400" text-anchor="middle" class="section-title">GitHub Analytics</text>
     <foreignObject x="40" y="420" width="370" height="150">
         <img width="370" height="150" 
-             src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=JhonaCodes&theme=tokyonight"
+             src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=JhonaCodes"
              style="border-radius: 10px;"/>
     </foreignObject>
 
@@ -99,7 +99,7 @@
     <g transform="translate(125, 750)">
         <text x="100" y="20" text-anchor="middle" class="section-title" style="font-size: 16px;">Profile Views</text>
         <foreignObject x="0" y="30" width="200" height="30">
-            <img src="https://komarev.com/ghpvc/?username=JhonaCodes&color=blue&style=for-the-badge" 
+            <img src="https://komarev.com/ghpvc/?username=JhonaCodes" 
                  style="display: block; margin: auto;"/>
         </foreignObject>
     </g>
