@@ -25,14 +25,14 @@ jobs:
           from github import Github
           import os
           
-          token = os.getenv('GITHUB_TOKEN')
-          if not token:
-              raise ValueError("No se encontró el token de GitHub")
-              
-          g = Github(token)
+          g = Github(os.getenv('GITHUB_TOKEN'))
           user = g.get_user('JhonaCodes')
           
-          target_languages = ['Java', 'Dart', 'Kotlin', 'Rust']
+          # Definir el orden deseado
+          desired_order = ['Dart', 'Rust', 'Java', 'Kotlin']
+          
+          # Recolectar los datos reales
+          target_languages = set(desired_order)
           language_bytes = {lang: 0 for lang in target_languages}
           total_bytes = 0
           
@@ -47,19 +47,17 @@ jobs:
                   print(f"Error processing repo {repo.name}: {e}")
           
           if total_bytes == 0:
-              print("No se encontraron bytes de código")
               total_bytes = 1
           
-          percentages = {lang: round((bytes/total_bytes)*100 if total_bytes > 0 else 0, 1) 
-                        for lang, bytes in language_bytes.items()}
-          
-          print("Percentages calculated:", percentages)
+          # Calcular porcentajes pero mantener el orden deseado
+          percentages = {lang: round((language_bytes[lang]/total_bytes)*100 if total_bytes > 0 else 0, 1) 
+                        for lang in desired_order}
           
           colors = {
-              'Java': '#b07219',
               'Dart': '#00B4AB',
-              'Kotlin': '#A97BFF',
-              'Rust': '#dea584'
+              'Rust': '#dea584',
+              'Java': '#b07219',
+              'Kotlin': '#A97BFF'
           }
           
           svg = f'''<?xml version="1.0" encoding="UTF-8"?>
@@ -72,7 +70,7 @@ jobs:
                       <text x="235" y="0" font-family="Arial" font-size="12" fill="#38bdae">{percentages[lang]}%</text>
                       <rect x="0" y="8" width="250" height="8" fill="#1f2133" rx="4"/>
                       <rect x="0" y="8" width="{percentages[lang]*2.5}" height="8" fill="{colors[lang]}" rx="4"/>
-                  </g>''' for i, lang in enumerate(target_languages))}
+                  </g>''' for i, lang in enumerate(desired_order))}
           </svg>
           '''
           
