@@ -17,7 +17,7 @@ jobs:
         run: pip install PyGithub
       - name: Update stats
         env:
-          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.G_T }}
         run: |
           python - <<EOF
           from github import Github
