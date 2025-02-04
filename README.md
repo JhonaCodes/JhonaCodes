@@ -41,6 +41,3 @@ I am a Software Engineer passionate about creating innovative and efficient appl
 ![](https://img.shields.io/badge/-Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white)
 ![](https://img.shields.io/badge/-Rust-darksalmon?style=flat-square&logo=Rust&logoColor=fff)
 ![](https://img.shields.io/badge/-Git-B22222?style=flat-square&logo=Git&logoColor=fff)
-
-<!-- Racha de contribuciones -->
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=JhonaCodes&theme=github-dark-blue&hide_border=true)
