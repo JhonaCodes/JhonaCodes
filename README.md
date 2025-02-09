@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Jhonacodes-181717?style=for-the-badge&logo=github)](https://github.com/JhonaCodes)
 [![Email](https://img.shields.io/badge/Email-jhonacodes@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jhonacodes@gmail.com)
 <img src="https://komarev.com/ghpvc/?username=JhonaCodes&color=blue&style=for-the-badge" alt="Profile Visits">
-  
+
 </div>
 
 <div align="center">
@@ -18,7 +18,7 @@
 <table width="100%">
   <tr>
     <td width="50%">
-        <img width="100%" src="https://github-readme-stats.vercel.app/api?username=JhonaCodes&count_private=true&show_icons=true&theme=transparent&hide_border=true&card_width=500" />
+        <img width="100%" src="https://github-readme-stats-five-tau-29.vercel.app/api?username=jhonacodes&&show_icons=true&count_private=true&theme=transparent&hide_border=true&card_width=500" />
     </td>
     <td width="50%">
         <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JhonaCodes&layout=compact&theme=transparent&hide_border=true&size_weight=0.5&count_weight=0.5&exclude_repo=xformers-prebuild-wheels,Isotr0py.github.io&hide=cmake,shell,swift,html,ruby&card_width=500" />
