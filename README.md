@@ -8,7 +8,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Jhonacodes-181717?style=for-the-badge&logo=github)](https://github.com/JhonaCodes)
 [![Email](https://img.shields.io/badge/Email-jhonacodes@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jhonacodes@gmail.com)
 <img src="https://komarev.com/ghpvc/?username=JhonaCodes&color=blue&style=for-the-badge" alt="Profile Visits">
-
 </div>
 
 <div align="center">
