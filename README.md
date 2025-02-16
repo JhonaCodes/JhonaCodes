@@ -20,7 +20,7 @@
         <img width="100%" src="https://github-readme-stats-five-tau-29.vercel.app/api?username=jhonacodes&&show_icons=true&count_private=true&theme=transparent&hide_border=true&card_width=500" />
     </td>
     <td width="50%">
-        <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JhonaCodes&layout=compact&theme=transparent&hide_border=true&size_weight=0.5&count_weight=0.5&exclude_repo=xformers-prebuild-wheels,Isotr0py.github.io&hide=cmake,shell,swift,html,ruby&card_width=500" />
+        <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JhonaCodes&layout=compact&theme=transparent&hide_border=true&size_weight=0.5&count_weight=0.5&exclude_repo=xformers-prebuild-wheels,Isotr0py.github.io&hide=objective-c,c,cmake,shell,html,swift,ruby,dockerfile,c%2B%2B&card_width=500" />
     </td>
   </tr>
   <tr>
