@@ -33,10 +33,3 @@
 ## 🤖 **About me**
 
 I am a Software Engineer passionate about creating innovative and efficient applications. My experience covers both native mobile development and cross-platform solutions, always striving for excellence in every project. I have a strong focus on optimization and high-performance solutions, ensuring seamless and scalable experiences.
-
-
-## 📜 **Skills**
-![](https://img.shields.io/badge/-Dart-0175C2?style=flat-square&logo=dart&logoColor=white)
-![](https://img.shields.io/badge/-Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white)
-![](https://img.shields.io/badge/-Rust-darksalmon?style=flat-square&logo=Rust&logoColor=fff)
-![](https://img.shields.io/badge/-Git-B22222?style=flat-square&logo=Git&logoColor=fff)
