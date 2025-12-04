@@ -10,22 +10,19 @@
 <img src="https://komarev.com/ghpvc/?username=JhonaCodes&color=blue&style=for-the-badge" alt="Profile Visits">
 </div>
 
-<div align="center">
-  <img src="https://github.com/JhonaCodes/jhonacode/raw/main/banner_jhonacode.png" width="100%" alt="Banner">
-</div>
-
 <table width="100%">
   <tr>
     <td width="50%">
-        <img width="100%" src="https://github-readme-stats-five-tau-29.vercel.app/api?username=jhonacodes&&show_icons=true&count_private=true&theme=transparent&hide_border=true&card_width=500" />
+        <img width="100%" src="https://github-readme-stats-five-tau-29.vercel.app/api?username=JhonaCodes&show_icons=true&count_private=true&theme=transparent&hide_border=true&card_width=500" />
     </td>
     <td width="50%">
-        <img width="100%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JhonaCodes&layout=compact&theme=transparent&hide_border=true&size_weight=0.5&count_weight=0.5&exclude_repo=xformers-prebuild-wheels,Isotr0py.github.io&hide=objective-c,c,cmake,shell,html,swift,ruby,dockerfile,c%2B%2B&card_width=500" />
+        <img width="100%" src="https://github-readme-stats-five-tau-29.vercel.app/api/top-langs/?username=JhonaCodes&layout=compact&theme=transparent&hide_border=true&size_weight=0.5&count_weight=0.5&exclude_repo=xformers-prebuild-wheels,Isotr0py.github.io&hide=objective-c,c,cmake,shell,html,swift,ruby,dockerfile,c%2B%2B&card_width=500" />
     </td>
   </tr>
   <tr>
     <td colspan="2" align="center">
-        <img width="100%" src="https://github-profile-trophy.vercel.app/?username=JhonaCodes&title=-Followers&theme=algolia&no-bg=true&no-frame=true&column=8&margin-w=5" />
+        <img width="100%" src="https://github-profile-trophy-kappa-eight.vercel.app/?username=JhonaCodes&title=Stars,Commits,PullRequest,Repositories&theme=algolia&no-bg=true&no-frame=true&column=4&margin-w=15" />
+    </td>
   </tr>
 </table>
 
